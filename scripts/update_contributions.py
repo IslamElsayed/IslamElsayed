@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
 """Rewrites the contributions section of README.md from GitHub search.
 
-Lists pull requests by USER that were merged into (or are open against)
-public repositories the user doesn't own.
+Lists pull requests by USER that were merged into public repositories the
+user doesn't own, newest first.
 """
 import json
 import os
 import re
 import urllib.parse
 import urllib.request
-from collections import defaultdict
 
 USER = os.environ.get("GITHUB_USER", "IslamElsayed")
 TOKEN = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
@@ -38,37 +37,31 @@ def repo_of(item):
     return item["repository_url"].split("/repos/", 1)[1]
 
 
-def render(merged, open_prs):
+def project(repo):
+    owner, name = repo.split("/")
+    # puma/puma, caddyserver/caddy and the like read better as just the name.
+    return name if owner.lower().startswith(name.lower()) else repo
+
+
+def clean_title(title):
+    # Drop commit-style prefixes such as "fix(s3): " or "reverseproxy: ".
+    title = re.sub(r"^[\w./()-]+:\s+", "", title)
+    return title[:1].upper() + title[1:]
+
+
+def render(merged):
     lines = []
-    by_repo = defaultdict(list)
-    for pr in merged:
-        by_repo[repo_of(pr)].append(pr)
-
-    lines.append(f"**{len(merged)} merged** into {len(by_repo)} projects · **{len(open_prs)} in review**\n")
-    lines.append("### Merged\n")
-    for repo, prs in sorted(by_repo.items(), key=lambda kv: max(p["closed_at"] for p in kv[1]), reverse=True):
-        lines.append(f"**[{repo}](https://github.com/{repo})**")
-        for pr in sorted(prs, key=lambda p: p["closed_at"], reverse=True):
-            lines.append(f"- [{pr['title']}]({pr['html_url']}) · {pr['closed_at'][:10]}")
-        lines.append("")
-
-    if open_prs:
-        lines.append("### In review\n")
-        for pr in sorted(open_prs, key=lambda p: p["created_at"], reverse=True):
-            lines.append(f"- [{repo_of(pr)}#{pr['number']}]({pr['html_url']}): {pr['title']}")
-        lines.append("")
-
+    for pr in sorted(merged, key=lambda p: p["closed_at"], reverse=True):
+        lines.append(f"- **{project(repo_of(pr))}**: [{clean_title(pr['title'])}]({pr['html_url']})")
     return "\n".join(lines)
 
 
 def main():
-    base = f"is:pr is:public author:{USER} -user:{USER}"
-    merged = search(f"{base} is:merged")
-    open_prs = search(f"{base} is:open")
+    merged = search(f"is:pr is:public is:merged author:{USER} -user:{USER}")
 
     with open(README) as file:
         readme = file.read()
-    section = f"{START}\n{render(merged, open_prs)}\n{END}"
+    section = f"{START}\n{render(merged)}\n{END}"
     updated = re.sub(re.escape(START) + r".*?" + re.escape(END), lambda _: section, readme, flags=re.S)
     if updated != readme:
         with open(README, "w") as file:
