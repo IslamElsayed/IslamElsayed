@@ -5,6 +5,7 @@ Engineering manager and backend engineer, 13+ years, mostly Ruby on Rails and Po
 #### Open source
 
 <!-- contributions:start -->
+- **caddy**: [New `tls_automate_names` global option](https://github.com/caddyserver/caddy/pull/8015)
 - **ruby/rubygems**: [Stop `Bundler.bin_path` creating the directory it reports](https://github.com/ruby/rubygems/pull/9887)
 - **ruby/rubygems**: [Report the effective platform in `bundle platform`](https://github.com/ruby/rubygems/pull/9898)
 - **grafana/k6**: [Report an unhandled promise rejection as a script exception](https://github.com/grafana/k6/pull/6406)
