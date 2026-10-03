@@ -5,6 +5,7 @@ Engineering manager and backend engineer, 13+ years, mostly Ruby on Rails and Po
 #### Open source
 
 <!-- contributions:start -->
+- **puma**: [Add continue_callback to answer Expect: 100-continue before the body is read](https://github.com/puma/puma/pull/4028)
 - **caddy**: [New `tls_automate_names` global option](https://github.com/caddyserver/caddy/pull/8015)
 - **ruby/rubygems**: [Stop `Bundler.bin_path` creating the directory it reports](https://github.com/ruby/rubygems/pull/9887)
 - **ruby/rubygems**: [Report the effective platform in `bundle platform`](https://github.com/ruby/rubygems/pull/9898)
