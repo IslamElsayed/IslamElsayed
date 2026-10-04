@@ -2,7 +2,8 @@
 """Rewrites the contributions section of README.md from GitHub search.
 
 Lists pull requests by USER that were merged into public repositories the
-user doesn't own, newest first.
+user doesn't own, grouped by project. Projects are ordered by their latest
+merge, and each project's pull requests newest first.
 """
 import json
 import os
@@ -37,10 +38,28 @@ def repo_of(item):
     return item["repository_url"].split("/repos/", 1)[1]
 
 
+# How a project is shown; anything not listed is shown by its repository name.
+DISPLAY_NAMES = {
+    "puma/puma": "Puma",
+    "caddyserver/caddy": "Caddy",
+    "caddyserver/website": "Caddy docs",
+    "ruby/rubygems": "RubyGems",
+    "rubygems/rubygems": "RubyGems",
+    "grafana/k6": "k6",
+    "supabase/storage": "Supabase Storage",
+    "solidusio/solidus": "Solidus",
+    "spree/spree": "Spree",
+    "traefik/traefik": "Traefik",
+    "derailed/k9s": "k9s",
+    "rails/solid_queue": "Solid Queue",
+    "thoughtbot/factory_bot": "factory_bot",
+    "rubocop/rubocop": "RuboCop",
+    "rubocop/rubocop-rails": "RuboCop Rails",
+}
+
+
 def project(repo):
-    owner, name = repo.split("/")
-    # puma/puma, caddyserver/caddy and the like read better as just the name.
-    return name if owner.lower().startswith(name.lower()) else repo
+    return DISPLAY_NAMES.get(repo, repo.split("/")[1])
 
 
 def clean_title(title):
@@ -49,10 +68,22 @@ def clean_title(title):
     return title[:1].upper() + title[1:]
 
 
+def link(pr):
+    return f"[{clean_title(pr['title'])}]({pr['html_url']})"
+
+
 def render(merged):
-    lines = []
+    groups = {}
     for pr in sorted(merged, key=lambda p: p["closed_at"], reverse=True):
-        lines.append(f"- **{project(repo_of(pr))}**: [{clean_title(pr['title'])}]({pr['html_url']})")
+        groups.setdefault(project(repo_of(pr)), []).append(pr)
+
+    lines = []
+    for name, prs in groups.items():
+        if len(prs) == 1:
+            lines.append(f"- **{name}**: {link(prs[0])}")
+        else:
+            lines.append(f"- **{name}**")
+            lines.extend(f"  - {link(pr)}" for pr in prs)
     return "\n".join(lines)
 
 
