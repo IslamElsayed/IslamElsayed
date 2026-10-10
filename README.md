@@ -5,6 +5,7 @@ Engineering manager and backend engineer, 13+ years, mostly Ruby on Rails and Po
 #### Open source
 
 <!-- contributions:start -->
+- **RuboCop**: [[Fix #14666] Make `Lint/UselessAssignment` register an offense for a block-captured variable that is never referenced](https://github.com/rubocop/rubocop/pull/15890)
 - **Puma**
   - [Add continue_callback to answer Expect: 100-continue before the body is read](https://github.com/puma/puma/pull/4028)
   - [Send close_notify when closing an SSL connection on JRuby](https://github.com/puma/puma/pull/4029)
