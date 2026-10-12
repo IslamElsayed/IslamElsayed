@@ -9,6 +9,7 @@ Engineering manager and backend engineer, 13+ years, mostly Ruby on Rails and Po
 - **Puma**
   - [Add continue_callback to answer Expect: 100-continue before the body is read](https://github.com/puma/puma/pull/4028)
   - [Send close_notify when closing an SSL connection on JRuby](https://github.com/puma/puma/pull/4029)
+- **Caddy docs**: [Document the `tls_automate_names` global option](https://github.com/caddyserver/website/pull/570)
 - **Caddy**
   - [New `tls_automate_names` global option](https://github.com/caddyserver/caddy/pull/8015)
   - [Replace only known placeholders in health check body](https://github.com/caddyserver/caddy/pull/8003)

@@ -2,8 +2,8 @@
 """Rewrites the contributions section of README.md from GitHub search.
 
 Lists pull requests by USER that were merged into public repositories the
-user doesn't own, grouped by project. Projects are ordered by their latest
-merge, and each project's pull requests newest first.
+user doesn't own, plus the ones in LANDED, grouped by project. Projects are
+ordered by their latest merge, and each project's pull requests newest first.
 """
 import json
 import os
@@ -32,6 +32,23 @@ def search(query):
         if len(batch) < 100:
             return items
         page += 1
+
+
+# Pull requests that landed without GitHub marking them merged, such as when a
+# maintainer pushes the commits to the default branch and closes the PR.
+LANDED = [
+    "caddyserver/website/issues/570",
+]
+
+
+def fetch(path):
+    request = urllib.request.Request(
+        "https://api.github.com/repos/" + path, headers={"Accept": "application/vnd.github+json"}
+    )
+    if TOKEN:
+        request.add_header("Authorization", f"Bearer {TOKEN}")
+    with urllib.request.urlopen(request) as response:
+        return json.load(response)
 
 
 def repo_of(item):
@@ -89,6 +106,7 @@ def render(merged):
 
 def main():
     merged = search(f"is:pr is:public is:merged author:{USER} -user:{USER}")
+    merged += [fetch(path) for path in LANDED]
 
     with open(README) as file:
         readme = file.read()
