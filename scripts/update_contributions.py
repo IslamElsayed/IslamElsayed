@@ -72,6 +72,15 @@ DISPLAY_NAMES = {
     "thoughtbot/factory_bot": "factory_bot",
     "rubocop/rubocop": "RuboCop",
     "rubocop/rubocop-rails": "RuboCop Rails",
+    "celery/celery": "Celery",
+    "rack/rack": "Rack",
+    "pytest-dev/pytest": "pytest",
+    "python-poetry/poetry": "Poetry",
+    "mochajs/mocha": "Mocha",
+    "nats-io/nats-server": "NATS Server",
+    "caddyserver/certmagic": "CertMagic",
+    "gofiber/schema": "Fiber schema",
+    "gofiber/fiber": "Fiber",
 }
 
 
