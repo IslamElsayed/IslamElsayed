@@ -5,6 +5,7 @@ Engineering manager and backend engineer, 13+ years, mostly Ruby on Rails and Po
 #### Open source
 
 <!-- contributions:start -->
+- **Fiber schema**: [Decode map fields from dotted keys](https://github.com/gofiber/schema/pull/100)
 - **Celery**: [Send the worker hostname as the worker_process_init sender](https://github.com/celery/celery/pull/10849)
 - **RuboCop**: [[Fix #14666] Make `Lint/UselessAssignment` register an offense for a block-captured variable that is never referenced](https://github.com/rubocop/rubocop/pull/15890)
 - **Puma**
