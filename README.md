@@ -5,6 +5,10 @@ Engineering manager and backend engineer, 13+ years, mostly Ruby on Rails and Po
 #### Open source
 
 <!-- contributions:start -->
+- **RubyGems**
+  - [Apply BUNDLE_RETRY to lazy gemspec downloads](https://github.com/ruby/rubygems/pull/9868)
+  - [Stop `Bundler.bin_path` creating the directory it reports](https://github.com/ruby/rubygems/pull/9887)
+  - [Report the effective platform in `bundle platform`](https://github.com/ruby/rubygems/pull/9898)
 - **Fiber**: [🔥 feat: support map fields in query and form binding](https://github.com/gofiber/fiber/pull/4788)
 - **Fiber schema**: [Decode map fields from dotted keys](https://github.com/gofiber/schema/pull/100)
 - **Celery**: [Send the worker hostname as the worker_process_init sender](https://github.com/celery/celery/pull/10849)
@@ -16,9 +20,6 @@ Engineering manager and backend engineer, 13+ years, mostly Ruby on Rails and Po
 - **Caddy**
   - [New `tls_automate_names` global option](https://github.com/caddyserver/caddy/pull/8015)
   - [Replace only known placeholders in health check body](https://github.com/caddyserver/caddy/pull/8003)
-- **RubyGems**
-  - [Stop `Bundler.bin_path` creating the directory it reports](https://github.com/ruby/rubygems/pull/9887)
-  - [Report the effective platform in `bundle platform`](https://github.com/ruby/rubygems/pull/9898)
 - **k6**: [Report an unhandled promise rejection as a script exception](https://github.com/grafana/k6/pull/6406)
 - **Supabase Storage**: [Enforce content-length-range in presigned POST policies](https://github.com/supabase/storage/pull/1449)
 <!-- contributions:end -->
