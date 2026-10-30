@@ -5,6 +5,7 @@ Engineering manager and backend engineer, 13+ years, mostly Ruby on Rails and Po
 #### Open source
 
 <!-- contributions:start -->
+- **good_job**: [Add a separate retention period for discarded jobs](https://github.com/bensheldon/good_job/pull/1897)
 - **RubyGems**
   - [Apply BUNDLE_RETRY to lazy gemspec downloads](https://github.com/ruby/rubygems/pull/9868)
   - [Stop `Bundler.bin_path` creating the directory it reports](https://github.com/ruby/rubygems/pull/9887)
