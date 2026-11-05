@@ -5,6 +5,7 @@ Engineering manager and backend engineer, 13+ years, mostly Ruby on Rails and Po
 #### Open source
 
 <!-- contributions:start -->
+- **rails**: [Show the template's line for syntax errors compiled through Herb](https://github.com/rails/rails/pull/59602)
 - **Fiber schema**
   - [🐛 fix: match required keys as the decoder does](https://github.com/gofiber/schema/pull/105)
   - [Decode map fields from dotted keys](https://github.com/gofiber/schema/pull/100)
